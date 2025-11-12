@@ -61,15 +61,15 @@ Weapon (composition - separate class)
 ### **Local Testing**
 ```bash
 # Run all tests
-python -m pytest tests/ -v
+python3 -m pytest tests/ -v
 
 # Run specific test categories
-python -m pytest tests/test_inheritance.py -v
-python -m pytest tests/test_method_overriding.py -v
-python -m pytest tests/test_special_abilities.py -v
+python3 -m pytest tests/test_inheritance.py -v
+python3 -m pytest tests/test_method_overriding.py -v
+python3 -m pytest tests/test_special_abilities.py -v
 
 # Test your main program
-python project2_starter.py
+python3 -m project2_starter.py -v
 ```
 
 ### **GitHub Testing**
@@ -145,3 +145,12 @@ Feel free to add your own creative touches for bonus points:
 - Additional character classes beyond the three required
 - More weapon types with different properties
 - Enhanced special abilities with unique effects
+
+## Documentation
+I implemented a magic and physical rogue, where if the user said their rogue could is magic (self.magic_usage = True), their damage would be calc'd from the average of the user's magic and strength stats.
+
+## Ai Usage
+In this project, I did use ChatGPT to fix the calculations in both my warrior and rogue attack functions, but that is all
+
+## How to run
+Call whatever classes you would like, putting the arguments in the right order, and properly identifying if the rogue can use magic or not. then when you have your classes called, call the simple battle function to see who wins.
