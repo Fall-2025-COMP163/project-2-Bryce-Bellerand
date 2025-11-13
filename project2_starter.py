@@ -126,7 +126,7 @@ class Rogue(Player):
             print(f"{self.name} strikes for {damage} damage!")
             target.take_damage(damage)
         elif self.magic_usage == True:
-            damage = random.randint(1, (self.magic + self.strength)//2) 
+            damage = random.randint(4, (self.magic + self.strength)//2) 
             if random.randint(1, 10) <= 3:
                 damage *= 4
                 print("💥 Critical hit!")
