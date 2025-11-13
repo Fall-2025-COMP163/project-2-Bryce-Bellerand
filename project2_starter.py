@@ -89,12 +89,12 @@ class Warrior(Player):
         super().__init__(name, "Warrior", 120, 20, 5)
 
     def attack(self, target):
-        damage = random.randint(5, self.strength + 5)
+        damage = random.randint(1, self.strength + 5)
         print(f"{self.name} swings mightily for {damage} damage!")
         target.take_damage(damage)
 
     def power_strike(self, target):
-        power_damage = random.randint(15, self.strength + 15)
+        power_damage = random.randint(20, self.strength + 20)
         print(f"{self.name} performs a POWER STRIKE for {power_damage} damage!")
         target.take_damage(power_damage)
 
@@ -103,12 +103,12 @@ class Mage(Player):
         super().__init__(name, "Mage", 80, 8, 20)
 
     def attack(self, target):
-        damage = random.randint(5, self.magic)
+        damage = random.randint(1, self.magic)
         print(f"{self.name} casts a spell for {damage} damage!")
         target.take_damage(damage)
 
     def fireball(self, target):
-        damage = random.randint(10, self.magic + 10)
+        damage = random.randint(15, self.magic + 15)
         print(f"{self.name} hurls a FIREBALL for {damage} damage!")
         target.take_damage(damage)
 
@@ -119,7 +119,7 @@ class Rogue(Player):
 
     def attack(self, target):
         if self.magic_usage == False:
-            damage = random.randint(1, self.strength) 
+            damage = random.randint(4, self.strength) 
             if random.randint(1, 10) <= 3:
                 damage *= 4
                 print("💥 Critical hit!")
@@ -139,7 +139,7 @@ class Rogue(Player):
             print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
             target.take_damage(damage)
         else:
-            damage = (random.randint(1, self.strength)) * 4
+            damage = (random.randint(5, self.strength)) * 4
             print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
             target.take_damage(damage)
 
