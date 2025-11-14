@@ -89,12 +89,12 @@ class Warrior(Player):
         super().__init__(name, "Warrior", 120, 20, 5)
 
     def attack(self, target):
-        damage = random.randint(1, self.strength + 5)
+        damage = random.randint(1, self.strength - 5) + 5
         print(f"{self.name} swings mightily for {damage} damage!")
         target.take_damage(damage)
 
     def power_strike(self, target):
-        power_damage = random.randint(20, self.strength + 20)
+        power_damage = random.randint(25, self.strength + 10) + 5
         print(f"{self.name} performs a POWER STRIKE for {power_damage} damage!")
         target.take_damage(power_damage)
 
@@ -103,12 +103,12 @@ class Mage(Player):
         super().__init__(name, "Mage", 80, 8, 20)
 
     def attack(self, target):
-        damage = random.randint(1, self.magic)
+        damage = random.randint(4, self.magic)
         print(f"{self.name} casts a spell for {damage} damage!")
         target.take_damage(damage)
 
     def fireball(self, target):
-        damage = random.randint(15, self.magic + 15)
+        damage = self.magic + random.randint(10, 20)
         print(f"{self.name} hurls a FIREBALL for {damage} damage!")
         target.take_damage(damage)
 
@@ -118,30 +118,42 @@ class Rogue(Player):
         super().__init__(name, "Rogue", 90, 12, 10)
 
     def attack(self, target):
-        if self.magic_usage == False:
-            damage = random.randint(4, self.strength) 
-            if random.randint(1, 10) <= 3:
-                damage *= 4
+        # Physical mode
+        if not self.magic_usage:
+            damage = random.randint(15, self.strength + 10)
+
+            # 70% crit
+            if random.randint(1, 10) <= 7:
+                damage *= 2.5
                 print("💥 Critical hit!")
+
             print(f"{self.name} strikes for {damage} damage!")
             target.take_damage(damage)
-        elif self.magic_usage == True:
-            damage = random.randint(4, (self.magic + self.strength)//2) 
+
+        # Magic hybrid mode
+        else:
+            max_base = (self.magic + self.strength) // 2
+            damage = random.randint(4, max_base)
+
+            # 30% crit
             if random.randint(1, 10) <= 3:
-                damage *= 4
+                damage *= 2.5
                 print("💥 Critical hit!")
-            print(f"{self.name} attacks for {damage} damage!")
+
+            print(f"{self.name} attacks magically for {damage} damage!")
             target.take_damage(damage)
 
     def sneak_attack(self, target):
-        if self.magic_usage == True:
-            damage = (random.randint(1, (self.magic + self.strength)//2)) * 4
-            print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
-            target.take_damage(damage)
+        max_range = (self.magic + self.strength) // 2
+
+        if self.magic_usage:
+            damage = random.randint(max_range, max_range + 15) * 3
+
         else:
-            damage = (random.randint(5, self.strength)) * 4
-            print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
-            target.take_damage(damage)
+            damage = random.randint(10, self.strength + 8) * 4
+
+        print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
+        target.take_damage(damage)
 
 class Weapon:
     """
