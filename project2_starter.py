@@ -103,7 +103,7 @@ class Mage(Player):
         super().__init__(name, "Mage", 80, 8, 20)
 
     def attack(self, target):
-        damage = random.randint(4, self.magic)
+        damage = random.randint(8, self.magic + 5)
         print(f"{self.name} casts a spell for {damage} damage!")
         target.take_damage(damage)
 
@@ -120,11 +120,11 @@ class Rogue(Player):
     def attack(self, target):
         # Physical mode
         if not self.magic_usage:
-            damage = random.randint(15, self.strength + 10)
+            damage = random.randint(10, self.strength + 10)
 
             # 70% crit
-            if random.randint(1, 10) <= 7:
-                damage *= 2.5
+            if random.randint(1, 10) >= 7:
+                damage += 5
                 print("💥 Critical hit!")
 
             print(f"{self.name} strikes for {damage} damage!")
@@ -150,7 +150,7 @@ class Rogue(Player):
             damage = random.randint(max_range, max_range + 15) * 3
 
         else:
-            damage = random.randint(10, self.strength + 8) * 4
+            damage = random.randint(10, self.strength + 8) * 2
 
         print(f"{self.name} performs a SNEAK ATTACK for {damage} damage!")
         target.take_damage(damage)
@@ -236,3 +236,4 @@ if __name__ == "__main__":
     battle.fight()
     
     print("\n✅ Testing complete!")
+
